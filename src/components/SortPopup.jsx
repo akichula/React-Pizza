@@ -1,14 +1,28 @@
 import React from 'react';
+import {doc} from "prettier";
 
 const SortPopup = () => {
     const [visibility, setVisibility] = React.useState(false);
+    const sortRef = React.useRef();
+    console.log(sortRef.current)
+
 
     const toggleVisibility = () => {
         setVisibility(!visibility)
     }
 
+    const handleOutsideClick = (e) => {
+        if (!e.path.includes(sortRef.current)) {
+            setVisibility(false);
+        }
+    }
+
+    React.useEffect(() => {
+        document.body.addEventListener('click', handleOutsideClick)
+    }, [])
+
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"
@@ -23,7 +37,9 @@ const SortPopup = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => {toggleVisibility()}}>популярности</span>
+                <span onClick={() => {
+                    toggleVisibility()
+                }}>популярности</span>
             </div>
             {visibility && <div className="sort__popup">
                 <ul>
