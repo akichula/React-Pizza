@@ -1,14 +1,20 @@
 import React from 'react';
 import {doc} from "prettier";
 
-const SortPopup = () => {
+const SortPopup = ({items}) => {
     const [visibility, setVisibility] = React.useState(false);
     const sortRef = React.useRef();
-    console.log(sortRef.current)
-
+    const [activeItem, setActiveItem] = React.useState(null);
+    const activeLabel = items[activeItem];
+    //todo something went wrong...
 
     const toggleVisibility = () => {
-        setVisibility(!visibility)
+        setVisibility(!visibility);
+    }
+
+    const onSelectedItems = (index) => {
+        setActiveItem(index);
+        setVisibility(false);
     }
 
     const handleOutsideClick = (e) => {
@@ -24,7 +30,7 @@ const SortPopup = () => {
     return (
         <div ref={sortRef} className="sort">
             <div className="sort__label">
-                <svg
+                <svg className={visibility ? 'svg.rotate' : ''}
                     width="10"
                     height="6"
                     viewBox="0 0 10 6"
@@ -37,15 +43,26 @@ const SortPopup = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => {
+                <span
+                    onClick={() => {
                     toggleVisibility()
-                }}>популярности</span>
+                }}>умолчанию</span>
             </div>
             {visibility && <div className="sort__popup">
                 <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
+                    <li className={ activeItem === null ? 'active' : ''}
+                        onClick={() => {
+                            onSelectedItems(null)
+                        }}>умолчанию
+                    </li>
+                    {items && items.map((name, index) =>
+                        <li className={activeItem === index ? 'active' : ''}
+                            onClick={() => {
+                                onSelectedItems(index)
+                            }}
+                            key={`${name}_${index}`}>
+                            {name}</li>)
+                    }
                 </ul>
             </div>}
         </div>
