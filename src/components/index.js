@@ -1,11 +1,6 @@
-import Header from './Header';
-import Button from './Button';
-import Categories from './Categories';
-import SortPopup from "./SortPopup";
+import Main from "../pages/Main";
+import Cart from "../pages/Cart";
 
 export {
-    Header,
-    Button,
-    Categories,
-    SortPopup
+    Main, Cart
 }

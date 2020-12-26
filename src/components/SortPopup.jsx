@@ -42,19 +42,14 @@ const SortPopup = ({items}) => {
                         fill="#2C2C2C"
                     />
                 </svg>
-                <b>Сортировка по:</b>
+                <b>Сортировка по: </b>
                 <span
                     onClick={() => {
                     toggleVisibility()
-                }}>умолчанию</span>
+                }}>_{activeLabel}</span>
             </div>
             {visibility && <div className="sort__popup">
                 <ul>
-                    <li className={ activeItem === null ? 'active' : ''}
-                        onClick={() => {
-                            onSelectedItems(null)
-                        }}>умолчанию
-                    </li>
                     {items && items.map((name, index) =>
                         <li className={activeItem === index ? 'active' : ''}
                             onClick={() => {
