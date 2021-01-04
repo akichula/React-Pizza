@@ -1,6 +1,21 @@
 import React from 'react';
+import classnames from 'classnames'
 
-const PizzaBlock = ({name, imageUrl, price}) => {
+const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
+    const doughs = ['тонкое', 'традиционное'];
+    const pizzaSizes = ['26 см', '30 см', '40 см'];
+
+    const [activeDough, setActiveDough] = React.useState(null);
+    const [activeSize, setActiveSize] = React.useState(null);
+
+    const onSelectedDough = (index) => {
+        setActiveDough(index);
+    }
+
+    const onSelectedSize = (index) => {
+        setActiveSize(index);
+    }
+
     return (
         <div className="pizza-block">
             <img
@@ -11,14 +26,25 @@ const PizzaBlock = ({name, imageUrl, price}) => {
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    {doughs.map((dough, index) => <li
+                        key={types}
+                        onClick={() => {
+                            onSelectedDough(index)
+                        }
+                        } className={classnames({
+                        active: activeDough === index,
+                        disable: !types.includes(index)
+                    })}>{dough}</li>)}
                 </ul>
                 <ul>
-                    <li className="active">26 см.
-                    </li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                    {pizzaSizes.map((pizzaSizes, index) => <li
+                        key={sizes}
+                        onClick={() => {
+                        onSelectedSize(index)
+                    }} className={classnames({
+                        active: activeSize === index,
+                        disable: !sizes.includes(index)
+                    })}>{sizes}</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
