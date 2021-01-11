@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames'
+import PropertyTypes from 'prop-types'
 
 const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
     const doughs = ['тонкое', 'традиционное'];
@@ -70,5 +71,12 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
         </div>
     )
 }
+
+PizzaBlock.PropertyTypes = {
+    name: PropertyTypes.string,
+    price: PropertyTypes.number,
+    types: PropertyTypes.array,
+    sizes: PropertyTypes.array
+};
 
 export default PizzaBlock;
