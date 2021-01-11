@@ -3,10 +3,12 @@ import classnames from 'classnames'
 
 const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
     const doughs = ['тонкое', 'традиционное'];
-    const pizzaSizes = ['26 см', '30 см', '40 см'];
+    const pizzaSizes = [26, 30, 40];
+    console.log(sizes[0])
 
-    const [activeDough, setActiveDough] = React.useState(null);
-    const [activeSize, setActiveSize] = React.useState(null);
+    const [activeDough, setActiveDough] = React.useState(types[0]);
+    const [activeSize, setActiveSize] = React.useState(sizes[0]);
+    //todo So, i just pretend to be broken, with no reason...
 
     const onSelectedDough = (index) => {
         setActiveDough(index);
@@ -30,21 +32,20 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
                         key={types}
                         onClick={() => {
                             onSelectedDough(index)
-                        }
-                        } className={classnames({
+                        }} className={classnames({
                         active: activeDough === index,
                         disable: !types.includes(index)
                     })}>{dough}</li>)}
                 </ul>
                 <ul>
-                    {pizzaSizes.map((pizzaSizes, index) => <li
-                        key={sizes}
+                    {pizzaSizes.map((size, index) => <li
+                        key={`${index}`}
                         onClick={() => {
                         onSelectedSize(index)
                     }} className={classnames({
                         active: activeSize === index,
-                        disable: !sizes.includes(index)
-                    })}>{sizes}</li>)}
+                        disable: !sizes.includes(size),
+                    })}>{size} см</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
