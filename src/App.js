@@ -10,7 +10,6 @@ import Main from "./pages/Main";
 import Cart from "./pages/Cart";
 
 import './css/App.css';
-import pizzas from "./redux/reducers/pizzas";
 
 function App() {
     const dispatch = useDispatch();
