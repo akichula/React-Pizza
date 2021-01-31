@@ -1,9 +1,10 @@
 import React from 'react';
-import Button from './Button'
+
 import {Link} from "react-router-dom";
 
+import {Button} from './index';
 
-function Header() {
+const Header = () => {
     return (
         <div className="header">
             <div className="container">

@@ -1,6 +1,7 @@
 import React from 'react';
-import classnames from 'classnames'
-import PropertyTypes from 'prop-types'
+
+import classnames from 'classnames';
+import PropertyTypes from 'prop-types';
 
 const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
     const doughs = ['тонкое', 'традиционное'];
@@ -9,7 +10,7 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
 
     const [activeDough, setActiveDough] = React.useState(types[0]);
     const [activeSize, setActiveSize] = React.useState(sizes[0]);
-    //todo So, i just pretend to be broken, with no reason...
+
 
     const onSelectedDough = (index) => {
         setActiveDough(index);

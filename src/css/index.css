@@ -286,7 +286,7 @@ svg {
  svg.rotate {
     transform: rotate(180deg);
 }
- /*todo doesn't work*/
+ /*todo So, i just pretend to be broken, with no reason...*/
 
 .sort__label b {
     margin-right: 8px
