@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Categories, SortPopup, PizzaBlock, PizzaLoadingBlock} from '../components/index'
 
 import {fetchPizzas} from "../redux/actions/pizzas";
-import {setCategory} from "../redux/actions/filters";
+import {setCategory, setSortBy} from "../redux/actions/filters";
 
 const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые',]
 const sortItems = [
@@ -23,36 +23,46 @@ const sortItems = [
     }
 ]
 
-const Main = (callback, deps) => {
+function Main() {
     const dispatch = useDispatch();
     const items = useSelector(({pizzas}) => pizzas.items);
     const isLoaded = useSelector(({pizzas}) => pizzas.isLoaded);
     const {sortBy, category} = useSelector(({filters}) => filters);
 
     React.useEffect(() => {
-        if (!items.length) {
-            dispatch(fetchPizzas());
-        }
-
-    }, [])
+        dispatch(fetchPizzas(sortBy, category));
+    }, [category, sortBy]);
 
     const onSelectCategory = React.useCallback((index) => {
         dispatch(setCategory(index))
         //todo I GOT A CYBERBULLIED FROM THIS PIECE OF SHIT!
-    }, [category, sortBy])
+    }, [])
+
+    const onSelectorType = React.useCallback((type) => {
+        dispatch(setSortBy(type));
+    }, [])
 
     return (
         <div className="container">
             <div className="content__top">
-                <Categories onClickItem={onSelectCategory} items={categories}/>
-                <SortPopup items={sortItems}/>
+                <Categories
+                    activeCategory={category}
+                    onClickCategory={onSelectCategory}
+                    items={categories}
+                />
+
+                <SortPopup
+                    items={sortItems}
+                    activeSortType={sortBy.type}
+                    onCLickSortType={onSelectorType}
+                />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
                     isLoaded
-                        ? items.map(obj => <PizzaBlock key={obj.id}  isLoading={true} {...obj}/>)
-                        : Array(10)
+                        ? items.map(obj => <PizzaBlock key={obj.id} isLoading={true} {...obj}/>)
+                        : Array(12)
                             .fill(0)
                             .map((_, index) => <PizzaLoadingBlock key={index}/>)
                 }

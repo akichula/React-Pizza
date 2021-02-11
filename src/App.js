@@ -5,10 +5,7 @@ import Route from 'react-router-dom/Route';
 import {Header} from "./components";
 import {Main, Cart} from "./pages";
 
-import './css/App.css';
-
 function App() {
-
     return (
         <div className="wrapper">
             <Header/>
@@ -17,7 +14,7 @@ function App() {
                 <Route exact path={'/cart'} component={Cart}/>
             </div>
         </div>
-    )
+    );
 }
 
 export default App;
