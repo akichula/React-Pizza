@@ -35,7 +35,6 @@ function Main() {
 
     const onSelectCategory = React.useCallback((index) => {
         dispatch(setCategory(index))
-        //todo I GOT A CYBERBULLIED FROM THIS PIECE OF SHIT!
     }, [])
 
     const onSelectorType = React.useCallback((type) => {
@@ -54,7 +53,7 @@ function Main() {
                 <SortPopup
                     items={sortItems}
                     activeSortType={sortBy.type}
-                    onCLickSortType={onSelectorType}
+                    onCLickSortPopup={onSelectorType}
                 />
             </div>
             <h2 className="content__title">Все пиццы</h2>
