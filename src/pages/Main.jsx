@@ -9,19 +9,10 @@ import {setCategory, setSortBy} from "../redux/actions/filters";
 
 const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые',]
 const sortItems = [
-    {
-        name: 'популярности',
-        type: 'popular'
-    },
-    {
-        name: 'цене',
-        type: 'price'
-    },
-    {
-        name: 'алфавиту',
-        type: 'alphabet'
-    }
-]
+    { name: 'популярности', type: 'popular', order: 'desc' },
+    { name: 'цене', type: 'price', order: 'desc' },
+    { name: 'алфавит', type: 'name', order: 'asc' },
+];
 
 function Main() {
     const dispatch = useDispatch();
@@ -53,8 +44,7 @@ function Main() {
                 <SortPopup
                     items={sortItems}
                     activeSortType={sortBy.type}
-                    onCLickSortPopup={onSelectorType}
-                />
+                    onClickSortType={onSelectorType}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
