@@ -3,7 +3,9 @@ import React from 'react';
 import classnames from 'classnames';
 import PropertyTypes from 'prop-types';
 
-const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
+import {Button} from "../index";
+
+const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza}) => {
     const doughs = ['тонкое', 'традиционное'];
     const pizzaSizes = [26, 30, 40];
     console.log(sizes[0])
@@ -43,8 +45,8 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
                     {pizzaSizes.map((size, index) => <li
                         key={`${index}`}
                         onClick={() => {
-                        onSelectedSize(index)
-                    }} className={classnames({
+                            onSelectedSize(index)
+                        }} className={classnames({
                         active: activeSize === index,
                         disable: !sizes.includes(size),
                     })}>{size} см</li>)}
@@ -52,7 +54,7 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} p</div>
-                <div className="button button--outline button--add">
+                <Button onClick className='button--add' outline>
                     <svg
                         width="12"
                         height="12"
@@ -67,7 +69,7 @@ const PizzaBlock = ({name, imageUrl, price, types, sizes}) => {
                     </svg>
                     <span>Добавить</span>
                     <i>2</i>
-                </div>
+                </Button>
             </div>
         </div>
     )
@@ -78,7 +80,8 @@ PizzaBlock.PropertyTypes = {
     imageUrl: PropertyTypes.string,
     price: PropertyTypes.number,
     types: PropertyTypes.arrayOf(PropertyTypes.number),
-    sizes: PropertyTypes.arrayOf(PropertyTypes.number)
+    sizes: PropertyTypes.arrayOf(PropertyTypes.number),
+    onClickAddPizza: PropertyTypes.func
 };
 
 PizzaBlock.defaultProps = {

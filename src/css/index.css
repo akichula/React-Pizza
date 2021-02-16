@@ -336,7 +336,7 @@ svg {
 }
 
 .pizza-block:not(:nth-of-type(4n)) {
-    margin-right: 35px
+    margin-right: 40px
 }
 
 .pizza-block__image {
@@ -344,7 +344,7 @@ svg {
 }
 
 .pizza-block__title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 900;
     letter-spacing: 1px;
     margin-bottom: 20px

@@ -9,9 +9,9 @@ import {setCategory, setSortBy} from "../redux/actions/filters";
 
 const categories = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые',]
 const sortItems = [
-    { name: 'популярности', type: 'popular', order: 'desc' },
-    { name: 'цене', type: 'price', order: 'desc' },
-    { name: 'алфавит', type: 'name', order: 'asc' },
+    {name: 'популярности', type: 'popular', order: 'desc'},
+    {name: 'цене', type: 'price', order: 'desc'},
+    {name: 'алфавит', type: 'name', order: 'asc'},
 ];
 
 function Main() {
@@ -50,10 +50,17 @@ function Main() {
             <div className="content__items">
                 {
                     isLoaded
-                        ? items.map(obj => <PizzaBlock key={obj.id} isLoading={true} {...obj}/>)
-                        : Array(12)
-                            .fill(0)
-                            .map((_, index) => <PizzaLoadingBlock key={index}/>)
+                        ? items
+                            .map(obj =>
+                                <PizzaBlock
+                                    onClickAddPizza
+                                    key={obj.id}
+                                    isLoading={true}
+                                    {...obj}
+                                />)
+                        : Array(12).fill(0)
+                            .map((_, index) =>
+                                <PizzaLoadingBlock key={index}/>)
                 }
             </div>
         </div>
