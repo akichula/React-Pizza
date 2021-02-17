@@ -5,13 +5,13 @@ import PropertyTypes from 'prop-types';
 
 import {Button} from "../index";
 
-const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza}) => {
+const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount}) => {
     const doughs = ['тонкое', 'традиционное'];
     const pizzaSizes = [26, 30, 40];
     console.log(sizes[0])
 
     const [activeDough, setActiveDough] = React.useState(types[0]);
-    const [activeSize, setActiveSize] = React.useState(sizes[0]);
+    const [activeSize, setActiveSize] = React.useState(0);
 
 
     const onSelectedDough = (index) => {
@@ -21,6 +21,19 @@ const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza}) 
     const onSelectedSize = (index) => {
         setActiveSize(index);
     }
+
+    const handleAddPizza = () => {
+        const obj = {
+            id,
+            name,
+            imageUrl,
+            price,
+            size: sizes[activeSize],
+            dough: doughs[activeDough]
+        }
+        onClickAddPizza(obj)
+    }
+
 
     return (
         <div className="pizza-block">
@@ -54,7 +67,7 @@ const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza}) 
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} p</div>
-                <Button onClick className='button--add' outline>
+                <Button onClick={handleAddPizza} className='button--add' outline>
                     <svg
                         width="12"
                         height="12"
@@ -68,7 +81,7 @@ const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onClickAddPizza}) 
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
+                    {addedCount && <i>{addedCount}</i>}
                 </Button>
             </div>
         </div>
@@ -81,7 +94,8 @@ PizzaBlock.PropertyTypes = {
     price: PropertyTypes.number,
     types: PropertyTypes.arrayOf(PropertyTypes.number),
     sizes: PropertyTypes.arrayOf(PropertyTypes.number),
-    onClickAddPizza: PropertyTypes.func
+    onClickAddPizza: PropertyTypes.func,
+    addedCount: PropertyTypes.number,
 };
 
 PizzaBlock.defaultProps = {
